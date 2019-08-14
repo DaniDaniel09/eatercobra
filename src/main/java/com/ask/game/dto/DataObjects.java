@@ -1,20 +1,25 @@
 package com.ask.game.dto;
 
 
+import com.ask.game.constants.Directions;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 //@Builder
 @NoArgsConstructor
-public class DataObjects {
+public class DataObjects implements Serializable {
     private Integer positionX;
     private Integer positionY;
     private Integer width;
     private Integer height;
     private Integer maxWidth;
     private Integer maxHeight;
+    private Directions directions;
+    private Integer speed;
 
     public Integer getPositionX() {
         return positionX;

@@ -1,22 +1,32 @@
 package com.ask.game.objects;
 
+import com.ask.game.constants.Directions;
 import com.ask.game.dto.DataObjects;
+import com.ask.game.dto.TimerInvoker;
+import com.ask.game.util.TimerInterval;
 
 import java.awt.*;
+import java.util.Random;
+import java.util.Timer;
 
-public class Snake extends Canvas {
+public class Snake extends Canvas implements TimerInvoker {
     private DataObjects dataObjects;
+    private TimerInterval<Snake> timerInterval;
 
     public Snake(DataObjects dataObjects) {
         this.dataObjects = dataObjects;
-        this.dataObjects.setWidth(50);
-        this.dataObjects.setHeight(50);
+        this.timerInterval = new TimerInterval(this);
+        Timer timer = new Timer("");
+        timer.scheduleAtFixedRate(timerInterval, 1000L, 100L);
     }
 
+    @Override
     public void paint(Graphics graphics) {
-        graphics.setColor(Color.BLUE);
-        graphics.fillOval(this.dataObjects.getPositionX(),this.dataObjects.getPositionY(),
-                this.dataObjects.getWidth(), this.dataObjects.getHeight());
+        Random random = new Random();
+        Color color = new Color(random.nextInt(255), random.nextInt(255) , random.nextInt(255));
+        graphics.setColor(color);
+        graphics.fillRoundRect(this.dataObjects.getPositionX(),this.dataObjects.getPositionY(),
+                this.dataObjects.getWidth(), this.dataObjects.getHeight(), 25,25);
 
     }
 
@@ -26,12 +36,20 @@ public class Snake extends Canvas {
     public void moveLeft() {
         int x =  this.dataObjects.getPositionX();
         int y = this.dataObjects.getPositionY();
-        x = x -1;
+        x = x - this.dataObjects.getSpeed();
         if (x <=0) {
-            moveRight();
+            this.moveRight();
             return;
         }
-        move(x,y);
+        this.syncLocation(x, y);
+        this.dataObjects.setDirections(Directions.LEFT);
+    }
+
+    private void syncLocation(int x, int y) {
+//        System.out.println(x + "y " + y);
+        this.dataObjects.setPositionX(x);
+        this.dataObjects.setPositionY(y);
+        setLocation(x, y);
     }
 
     /**
@@ -40,12 +58,13 @@ public class Snake extends Canvas {
     public void moveRight() {
         int x =  this.dataObjects.getPositionX();
         int y = this.dataObjects.getPositionY();
-        x = x+1;
+        x = x + this.dataObjects.getSpeed();
         if (x >= dataObjects.getMaxWidth()) {
-            moveLeft();
+            this.moveLeft();
             return;
         }
-        move(x,y);
+        this.syncLocation(x, y);
+        this.dataObjects.setDirections(Directions.RIGHT);
     }
 
     /**
@@ -54,12 +73,13 @@ public class Snake extends Canvas {
     public void moveUp(){
         int x =  this.dataObjects.getPositionX();
         int y = this.dataObjects.getPositionY();
-        y = y+1;
+        y = y - this.dataObjects.getSpeed();
         if (y <=0) {
-            moveDown();
+            this.moveDown();
             return;
         }
-        move(x,y);
+        this.syncLocation(x, y);
+        this.dataObjects.setDirections(Directions.UP);
     }
 
     /**
@@ -68,11 +88,32 @@ public class Snake extends Canvas {
     public void moveDown() {
         int x =  this.dataObjects.getPositionX();
         int y = this.dataObjects.getPositionY();
-        y = y +1;
-        if (y >= dataObjects.getHeight()) {
-            moveUp();
+        y = y + this.dataObjects.getSpeed();
+        if (y >= dataObjects.getMaxHeight()) {
+            this.moveUp();
             return;
         }
-        move(x,y);
+        this.syncLocation(x, y);
+        this.dataObjects.setDirections(Directions.DOWN);
+    }
+
+    public void beep() {
+        switch (dataObjects.getDirections()) {
+            case UP:
+                moveUp();
+                break;
+            case DOWN:
+                moveDown();
+                break;
+            case RIGHT:
+                moveRight();
+                break;
+            case LEFT:
+                moveLeft();
+                break;
+
+
+        }
+        repaint();
     }
 }
