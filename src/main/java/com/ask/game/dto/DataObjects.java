@@ -1,25 +1,28 @@
 package com.ask.game.dto;
 
 
-import com.ask.game.constants.Directions;
-import lombok.Builder;
+import com.ask.game.constants.Direction;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.awt.*;
 import java.io.Serializable;
 
 @Data
 //@Builder
 @NoArgsConstructor
-public class DataObjects implements Serializable {
+public class DataObjects implements Serializable,Cloneable {
     private Integer positionX;
     private Integer positionY;
     private Integer width;
     private Integer height;
     private Integer maxWidth;
     private Integer maxHeight;
-    private Directions directions;
-    private Integer speed;
+    private Direction direction;
+    private Integer distance;
+    private Color color;
+    private Integer destinationX;
+    private Integer destinationY;
 
     public Integer getPositionX() {
         return positionX;
@@ -67,5 +70,9 @@ public class DataObjects implements Serializable {
 
     public void setMaxHeight(Integer maxHeight) {
         this.maxHeight = maxHeight;
+    }
+
+    public DataObjects clone()throws CloneNotSupportedException{
+        return (DataObjects)super.clone();
     }
 }
