@@ -11,6 +11,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
 
+/**
+ *
+ * @author Daniel/DaniDaniel09
+ */
 public class FrameContainer extends JFrame implements KeyListener {
     private static final Integer MAX_WIDTH = 1200;
     private static final Integer MAX_HEIGHT = 800;
@@ -19,10 +23,16 @@ public class FrameContainer extends JFrame implements KeyListener {
 //    private GameUtil gameUtil;
     private Food food;
 
+    /**
+     *
+     */
     public FrameContainer() {
         super();
     }
 
+    /**
+     *
+     */
     public void placeObject() {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setBounds(0, 0, MAX_WIDTH, MAX_HEIGHT);
@@ -63,12 +73,19 @@ public class FrameContainer extends JFrame implements KeyListener {
 //        return dataObjects;
 //    }
 
-
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyTyped(KeyEvent e) {
         System.out.println("typed" + e.getKeyCode());
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         System.out.println("typed" + e.getKeyCode());
@@ -90,6 +107,10 @@ public class FrameContainer extends JFrame implements KeyListener {
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         System.out.println(e.getKeyCode());

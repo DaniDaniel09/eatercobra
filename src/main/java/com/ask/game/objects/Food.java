@@ -6,14 +6,27 @@ import com.ask.game.util.GameUtil;
 
 import java.awt.*;
 
+/**
+ *
+ * @author Daniel/DaniDaniel09
+ */
 public class Food extends Canvas implements TimerInvoker {
     private  DataObjects dataObjects;
     private GameUtil gameUtil;
+
+    /**
+     *
+     * @param dataObjects
+     */
     public Food(DataObjects dataObjects) {
         this.dataObjects = dataObjects;
         this.gameUtil = new GameUtil();
     }
 
+    /**
+     *
+     * @param graphics
+     */
     @Override
     public void paint(Graphics graphics) {
         super.paint(graphics);
@@ -22,10 +35,17 @@ public class Food extends Canvas implements TimerInvoker {
                 dataObjects.getWidth(), dataObjects.getHeight(), 25,25);
     }
 
+    /**
+     *
+     * @return
+     */
     public DataObjects getDataObjects() {
         return this.dataObjects;
     }
 
+    /**
+     *
+     */
     @Override
     public void beep() {
         this.dataObjects = this.gameUtil.getRandomPosition(dataObjects.getMaxWidth(), dataObjects.getMaxHeight());

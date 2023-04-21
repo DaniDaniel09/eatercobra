@@ -5,6 +5,11 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ *
+ * @author Daniel/DaniDaniel09
+ * @param <T>
+ */
 @Data
 //@Builder
 @NoArgsConstructor

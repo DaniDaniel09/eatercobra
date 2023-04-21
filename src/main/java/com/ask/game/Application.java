@@ -11,7 +11,11 @@ public class Application {
 
     Snake snake = null;
 
-
+    /**
+     *
+     * @param args
+     * @author Daniel/DaniDaniel09
+     */
     public static void main(String[] args) {
         FrameContainer frameContainer = new FrameContainer();
         frameContainer.placeObject();

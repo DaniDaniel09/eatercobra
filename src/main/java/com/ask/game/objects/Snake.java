@@ -13,6 +13,10 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.Timer;
 
+/**
+ *
+ * @author Daniel/DaniDaniel09
+ */
 public class Snake extends Canvas implements TimerInvoker {
     private TimerInterval<Snake> timerInterval;
     private transient CustomLinkedList<LinkedListNode<DataObjects>> linkedList;
@@ -21,6 +25,9 @@ public class Snake extends Canvas implements TimerInvoker {
     private GameUtil gameUtil;
     private Food food;
 
+    /**
+     *
+     */
     public Snake() {
         this.gameUtil = new GameUtil();
         DataObjects dataObjects = this.gameUtil.getRandomPosition(1200,800);
@@ -75,6 +82,13 @@ public class Snake extends Canvas implements TimerInvoker {
 
     }
 
+    /**
+     *
+     * @param positionX
+     * @param positionY
+     * @param dataObjects
+     * @return
+     */
     public DataObjects insertNode(int positionX, int positionY, DataObjects dataObjects) {
         DataObjects newObject = getDataObjectsClone(dataObjects);
         Direction direction = dataObjects.getDirection();
@@ -100,6 +114,10 @@ public class Snake extends Canvas implements TimerInvoker {
         return newObject;
     }
 
+    /**
+     *
+     * @param graphics
+     */
     @Override
     public void paint(Graphics graphics) {
         this.food.paint(graphics);
@@ -257,6 +275,9 @@ public class Snake extends Canvas implements TimerInvoker {
         this.syncLocation(x, y, Direction.DOWN);
     }
 
+    /**
+     *
+     */
     public void beep() {
         DataObjects dataObjects = this.linkedList.getHead().getData();
         switch (dataObjects.getDirection()) {

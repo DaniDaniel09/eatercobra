@@ -5,8 +5,19 @@ import com.ask.game.dto.DataObjects;
 
 import java.util.Random;
 
+/**
+ *
+ * @author Daniel/DaniDaniel09
+ */
 public class GameUtil {
     private static final Integer WIDTH_HEIGHT = 50;
+
+    /**
+     *
+     * @param width
+     * @param height
+     * @return
+     */
     public DataObjects getRandomPosition(int width, int height) {
         Random random = new Random();
         DataObjects dataObjects = new DataObjects();
